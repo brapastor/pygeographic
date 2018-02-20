@@ -1,0 +1,28 @@
+{% extends "countries/base.html" %}
+{% block title %}TAGS{% endblock %}
+{% block content %}
+    {% for country in countries  %}
+        <p>{{ country.name|capfirst }}</p>
+        {% if country.name == 'colombia' %}
+            <p>Tierra querida</p>
+        {% endif %}
+        <p>lorem: {% lorem %}</p>
+        Fecha actual {% now "Y-M-d" %}
+        {% filter force_escape|lower %}
+            ˆˆˆ%$%% TEXTO
+        {% endfilter %}
+    {% endfor %}
+
+    {{ "PRUEBA"|capfirst}}
+
+    {% if 6|divisibleby:"3" %}
+        chii
+    {% endif %}
+
+    {{ request.user }}
+
+    {% comment %}
+    texto prueba
+    {% endcomment %}
+
+{% endblock %}
