@@ -10,6 +10,6 @@
     <p>
         <a href="{% url "tags"  %}">IR a tags</a>
         <a href="{% url  "continents:continents_home"%} ">Ir a continentes</a>
-        <a href="{{ country_id_detail }}">Ir a country con el id 1</a>
+        <a href="{% url "countries:country_id_detail" id=1 %}">Ir a country con el id 1</a>
     </p>
 {% endblock %}

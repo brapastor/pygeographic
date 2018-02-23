@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, Http404
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
+from .models import Country
 
 
 # Create your views here.
@@ -46,4 +48,27 @@ class CountryDetailIDView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         code_id = kwargs['id']
-        return {'id': code_id}
+        country = get_object_or_404(Country, id=code_id)
+        # try:
+        #     country = Country.objects.get(id=code_id)
+        # except Country.DoesNotExist:
+        #     raise Http404()
+        return {'country': country}
+
+
+class CountrySearchView(ListView):
+    template_name = 'countries/search.html'
+    model = Country
+
+    # context_object_name = 'countries
+
+    def get_queryset(self):
+        # CON LAS kwargs SE OBTIENE EL PARAMETRO DE LA URLS
+        query = self.kwargs['query']
+
+        # io = [1, 2, 3]
+
+        return Country.objects.filter(name__contains=query)
+        # return Country.objects.filter(id__in=io)
+        # return Country.objects.filter(continent__name__contains='africa')
+        # return Country.objects.filter(name__startswith='ar')
