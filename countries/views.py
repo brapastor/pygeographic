@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from .models import Country
 
 
@@ -43,17 +44,22 @@ class CountryDetailView(TemplateView):
         return {'code': code}
 
 
-class CountryDetailIDView(TemplateView):
+class CountryDetailIDView(DetailView):
     template_name = "countries/country_id_detail.html"
+    model = Country
+    # context_object_name = 'country'
 
-    def get_context_data(self, *args, **kwargs):
-        code_id = kwargs['id']
-        country = get_object_or_404(Country, id=code_id)
-        # try:
-        #     country = Country.objects.get(id=code_id)
-        # except Country.DoesNotExist:
-        #     raise Http404()
-        return {'country': country}
+
+
+    # # cuando era TEMPLATEVIEW
+    # def get_context_data(self, *args, **kwargs):
+    #     code_id = kwargs['id']
+    #     country = get_object_or_404(Country, id=code_id)
+    #     # try:
+    #     #     country = Country.objects.get(id=code_id)
+    #     # except Country.DoesNotExist:
+    #     #     raise Http404()
+    #     return {'country': country}
 
 
 class CountrySearchView(ListView):
