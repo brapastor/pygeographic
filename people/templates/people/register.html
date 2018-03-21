@@ -4,7 +4,7 @@
     <form action="." method="post">
     {% csrf_token %}
         <label for="first_name">First name</label>
-        {{ form }}
+        {{ form.as_p }}
         <input type="submit" value="Register">
     </form>
 {% endblock %}

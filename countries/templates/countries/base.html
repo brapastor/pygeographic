@@ -5,9 +5,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>{% block  title %}Geo{% endblock %}</title>
+    <style>
+        div.a {
+            background: lightblue;
+        }
+    </style>
 </head>
 <body>
-{% block content %}
-{% endblock %}
+<div class="{% if request.session.testab == "a" %}a{% endif %}">
+    {% block content %}
+    {% endblock %}
+</div>
+
 </body>
 </html>

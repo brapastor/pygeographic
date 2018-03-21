@@ -16,7 +16,7 @@ class Country(models.Model):
     )
     name = models.CharField(max_length=255)
     code = models.CharField(max_length=3, choices=CODES_CHOICES)
-    continent = models.ForeignKey('continents.Continent', on_delete=models.CASCADE, related_name='countries', default=1)
+    continent = models.ForeignKey('continents.Continent', on_delete=models.CASCADE, related_name='countries')
     active = models.BooleanField(default=True)
     active_manager = ActiveManager()
     objects = models.Manager()
